@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Movies } from '../interfaces/interfaces';
 import { DataMoviesService } from '../services/data-movies.service';
 
 @Component({
@@ -8,10 +9,18 @@ import { DataMoviesService } from '../services/data-movies.service';
 })
 export class Tab1Page implements OnInit{
 
+  discover: Movies[] = [];
+
   constructor(private dataMovies: DataMoviesService) {}
 
   ngOnInit(): void {
-    this.dataMovies.getDiscover();
+    this.dataMovies.getDiscover().
+        subscribe(
+
+          resp=> {
+            console.log(resp)
+            this.discover = resp.results;
+          });
   }
 
 }
