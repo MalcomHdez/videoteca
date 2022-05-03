@@ -10,17 +10,29 @@ import { DataMoviesService } from '../services/data-movies.service';
 export class Tab1Page implements OnInit{
 
   discover: Movies[] = [];
+  popularity: Movies[] = [];
 
   constructor(private dataMovies: DataMoviesService) {}
 
+  //Los TypeScript son utilizados para consumir los servicios, ejemplo: data-movies.service.ts
+
   ngOnInit(): void {
+
     this.dataMovies.getDiscover().
         subscribe(
 
           resp=> {
-            console.log(resp)
+            //console.log(resp)
             this.discover = resp.results;
           });
+
+
+    this.dataMovies.getPopulary().
+          subscribe(
+            resp=> {
+              //console.log(resp)
+              this.popularity = resp.results;
+            });
   }
 
 }
